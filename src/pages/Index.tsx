@@ -1,10 +1,22 @@
-
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Link } from "react-router-dom";
-import CardBackDesign from '@/components/CardBackDesign';
+import CardBackDesign from "@/components/CardBackDesign";
 
 const Index = () => {
   const [selectedDeck, setSelectedDeck] = useState("classic");
@@ -15,12 +27,18 @@ const Index = () => {
       <div className="w-full max-w-md">
         <Card className="border-2 border-amber-300 shadow-xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold font-serif">Дурак</CardTitle>
-            <CardDescription>Классическая карточная игра с 54 картами</CardDescription>
+            <CardTitle className="text-3xl font-bold font-serif">
+              Дурак
+            </CardTitle>
+            <CardDescription>
+              Классическая карточная игра с 54 картами
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="block text-sm font-medium">Выберите дизайн карт:</label>
+              <label className="block text-sm font-medium">
+                Выберите дизайн карт:
+              </label>
               <Select value={selectedDeck} onValueChange={setSelectedDeck}>
                 <SelectTrigger>
                   <SelectValue placeholder="Выберите дизайн" />
@@ -33,9 +51,11 @@ const Index = () => {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="space-y-2">
-              <label className="block text-sm font-medium">Количество игроков:</label>
+              <label className="block text-sm font-medium">
+                Количество игроков:
+              </label>
               <Select value={playersCount} onValueChange={setPlayersCount}>
                 <SelectTrigger>
                   <SelectValue placeholder="Количество игроков" />
@@ -48,13 +68,20 @@ const Index = () => {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="mt-4 flex justify-center">
-              <CardBackDesign designType={selectedDeck} className="hover-scale" />
+              <CardBackDesign
+                designType={selectedDeck}
+                className="hover-scale"
+              />
             </div>
           </CardContent>
           <CardFooter>
-            <Link to="/game" className="w-full" state={{ selectedDeck, playersCount }}>
+            <Link
+              to="/game"
+              className="w-full"
+              state={{ selectedDeck, playersCount }}
+            >
               <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white">
                 Начать игру
               </Button>

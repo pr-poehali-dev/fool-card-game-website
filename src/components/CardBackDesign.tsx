@@ -1,5 +1,4 @@
-
-import { motion } from 'framer-motion';
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface CardBackDesignProps {
@@ -8,10 +7,12 @@ interface CardBackDesignProps {
 }
 
 const CardBackDesign = ({ designType, className }: CardBackDesignProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   // Разные дизайны для рубашек карт
   const renderDesign = () => {
     switch (designType) {
-      case 'classic':
+      case "classic":
         return (
           <div className="absolute inset-0 bg-red-600 flex items-center justify-center">
             <div className="w-4/5 h-4/5 border-4 border-white rounded-lg flex items-center justify-center">
@@ -19,24 +20,37 @@ const CardBackDesign = ({ designType, className }: CardBackDesignProps) => {
             </div>
           </div>
         );
-      
-      case 'modern':
+
+      case "modern":
         return (
           <div className="absolute inset-0 bg-blue-500">
             <div className="absolute inset-0 grid grid-cols-4 grid-rows-6 gap-1 p-2">
-              {Array(24).fill(0).map((_, i) => (
-                <div key={i} className="bg-blue-400 rounded-full flex items-center justify-center">
-                  {i % 4 === 0 && <span className="text-white text-xs">♦</span>}
-                  {i % 4 === 1 && <span className="text-white text-xs">♠</span>}
-                  {i % 4 === 2 && <span className="text-white text-xs">♥</span>}
-                  {i % 4 === 3 && <span className="text-white text-xs">♣</span>}
-                </div>
-              ))}
+              {Array(24)
+                .fill(0)
+                .map((_, i) => (
+                  <div
+                    key={i}
+                    className="bg-blue-400 rounded-full flex items-center justify-center"
+                  >
+                    {i % 4 === 0 && (
+                      <span className="text-white text-xs">♦</span>
+                    )}
+                    {i % 4 === 1 && (
+                      <span className="text-white text-xs">♠</span>
+                    )}
+                    {i % 4 === 2 && (
+                      <span className="text-white text-xs">♥</span>
+                    )}
+                    {i % 4 === 3 && (
+                      <span className="text-white text-xs">♣</span>
+                    )}
+                  </div>
+                ))}
             </div>
           </div>
         );
-      
-      case 'retro':
+
+      case "retro":
         return (
           <div className="absolute inset-0 bg-amber-700">
             <div className="absolute inset-0 flex items-center justify-center">
@@ -48,8 +62,8 @@ const CardBackDesign = ({ designType, className }: CardBackDesignProps) => {
             </div>
           </div>
         );
-      
-      case 'minimal':
+
+      case "minimal":
       default:
         return (
           <div className="absolute inset-0 bg-gray-200">
@@ -66,13 +80,17 @@ const CardBackDesign = ({ designType, className }: CardBackDesignProps) => {
   };
 
   return (
-    <motion.div 
-      className={cn("w-24 h-36 rounded-lg shadow-md overflow-hidden relative", className)}
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.2 }}
+    <div
+      className={cn(
+        "w-24 h-36 rounded-lg shadow-md overflow-hidden relative transition-transform duration-200",
+        isHovered && "transform scale-105",
+        className,
+      )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {renderDesign()}
-    </motion.div>
+    </div>
   );
 };
 
