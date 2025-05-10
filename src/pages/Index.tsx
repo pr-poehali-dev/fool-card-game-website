@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from "react-router-dom";
+import CardBackDesign from '@/components/CardBackDesign';
 
 const Index = () => {
   const [selectedDeck, setSelectedDeck] = useState("classic");
@@ -49,17 +50,11 @@ const Index = () => {
             </div>
             
             <div className="mt-4 flex justify-center">
-              <div className="w-24 h-36 bg-white rounded-lg shadow-md border border-gray-300 relative overflow-hidden transform hover:rotate-2 transition-transform duration-200">
-                <div className={`absolute inset-0 ${selectedDeck === 'classic' ? 'bg-red-600' : selectedDeck === 'modern' ? 'bg-blue-500' : selectedDeck === 'retro' ? 'bg-amber-700' : 'bg-gray-200'} flex items-center justify-center`}>
-                  <div className="text-white text-xl font-bold">
-                    {selectedDeck === 'classic' ? '♠' : selectedDeck === 'modern' ? '♦' : selectedDeck === 'retro' ? '♣' : '♥'}
-                  </div>
-                </div>
-              </div>
+              <CardBackDesign designType={selectedDeck} className="hover-scale" />
             </div>
           </CardContent>
           <CardFooter>
-            <Link to="/game" className="w-full">
+            <Link to="/game" className="w-full" state={{ selectedDeck, playersCount }}>
               <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white">
                 Начать игру
               </Button>

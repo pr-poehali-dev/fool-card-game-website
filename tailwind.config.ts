@@ -1,15 +1,14 @@
 
-import type { Config } from "tailwindcss";
+import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
-import * as path from "path";
 
-const config = {
+export default {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   prefix: "",
   theme: {
@@ -21,10 +20,6 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ["Roboto", ...fontFamily.sans],
-        serif: ["Playfair Display", ...fontFamily.serif],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -65,6 +60,8 @@ const config = {
           border: "hsl(var(--sidebar-border))",
           accent: "hsl(var(--sidebar-accent))",
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
           ring: "hsl(var(--sidebar-ring))",
         },
       },
@@ -72,6 +69,10 @@ const config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        serif: ["Playfair Display", ...fontFamily.serif],
       },
       keyframes: {
         "accordion-down": {
@@ -82,24 +83,12 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "card-flip": {
-          "0%": { transform: "rotateY(0deg)" },
-          "100%": { transform: "rotateY(180deg)" },
-        },
-        "card-unflip": {
-          "0%": { transform: "rotateY(180deg)" },
-          "100%": { transform: "rotateY(0deg)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "card-flip": "card-flip 0.5s ease-out forwards",
-        "card-unflip": "card-unflip 0.5s ease-out forwards",
       },
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
-
-export default config;

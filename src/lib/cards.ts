@@ -28,7 +28,7 @@ export const cards: Card[] = [
       suit: suit as Card['suit'],
       value,
       color: suit === 'hearts' || suit === 'diamonds' ? 'red' : 'black',
-      rank: ranks[value]
+      rank: ranks[value as keyof typeof ranks]
     }))
   ),
   // Добавляем 2 джокера

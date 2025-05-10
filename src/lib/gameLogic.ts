@@ -94,7 +94,7 @@ export const makeComputerMove = (gameState: GameState): GameState => {
   
   // Удаляем карту из руки компьютера
   const newComputerHand = computerHand.filter(card => 
-    card.suit !== cardToPlay.suit || card.value !== cardToPlay.value
+    !(card.suit === cardToPlay.suit && card.value === cardToPlay.value)
   );
   
   // Добавляем карту на стол

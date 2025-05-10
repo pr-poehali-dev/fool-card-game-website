@@ -1,13 +1,18 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Card as UICard } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PlayingCard from "@/components/PlayingCard";
+import CardBackDesign from "@/components/CardBackDesign";
 import { cards } from "@/lib/cards";
 
 const GamePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Получаем параметры из Location State
+  const { selectedDeck = 'classic', playersCount = '2' } = location.state || {};
+  
   const [gameState, setGameState] = useState({
     deck: [],
     playerHand: [],
@@ -66,9 +71,10 @@ const GamePage = () => {
         <div className="flex justify-center mb-8">
           <div className="flex space-x-[-25px]">
             {gameState.computerHand.map((_, index) => (
-              <div 
-                key={index} 
-                className="w-24 h-36 bg-indigo-600 rounded-lg shadow-md border-2 border-white overflow-hidden"
+              <CardBackDesign 
+                key={index}
+                designType={selectedDeck}
+                className="transform transition-transform"
               />
             ))}
           </div>
@@ -87,9 +93,9 @@ const GamePage = () => {
                 />
               ))
             ) : (
-              <UICard className="w-32 h-44 border-2 border-white border-dashed flex items-center justify-center text-white opacity-50">
+              <div className="w-32 h-44 border-2 border-white border-dashed flex items-center justify-center text-white opacity-50">
                 Игровая зона
-              </UICard>
+              </div>
             )}
           </div>
         </div>
@@ -103,11 +109,13 @@ const GamePage = () => {
           )}
           
           <div className="relative">
-            <div className="w-24 h-36 bg-indigo-600 rounded-lg shadow-md border-2 border-white">
-              <div className="absolute top-0 right-0 bg-amber-500 text-white text-xs px-1 rounded-bl">
-                {gameState.deck.length}
-              </div>
-            </div>
+            {gameState.deck.length > 0 && (
+              <CardBackDesign designType={selectedDeck} className="relative">
+                <div className="absolute top-0 right-0 bg-amber-500 text-white text-xs px-1 rounded-bl">
+                  {gameState.deck.length}
+                </div>
+              </CardBackDesign>
+            )}
           </div>
         </div>
         
